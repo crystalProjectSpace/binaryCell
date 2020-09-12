@@ -1,5 +1,3 @@
-'use strict'
-
 class CellField {
     constructor (width, height) {
         this.width = width
@@ -137,14 +135,6 @@ class CellField {
             }
         }
     }
-    // перевести следующее состояние к настоящему
-    /*update() {
-        for(let i = 0; i < this.width; i++) {
-            for(let j = 0; j < this.height; j++) {
-                this.cells[i][j] = this.cells[i][j] >> 2
-            }
-        }
-    }*/
     // визуализировать
     visualize() {
         this.context.fillStyle = '#000'

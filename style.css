@@ -1,0 +1,43 @@
+html {
+    --default-cl: #666;
+    --active-cl: #08d;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    font-family: Arial; 
+}
+
+.canvas {
+    display: block;
+    margin: auto;
+    border: 1px solid var(--default-cl);
+    width: 500px;
+    height: 500px;
+    margin-bottom: 50px;
+}
+.canvas-port {
+    width: 600px;
+    margin: 100px auto;
+}
+
+.canvas-control {
+    display: block;
+    margin: auto;
+    padding: 7px 20px;
+    background-color: #fff;
+    color: var(--default-cl);
+    border: 1px solid var(--default-cl);
+}
+
+.canvas-control:hover, .canvas-control:active, .canvas-control.halt  {
+    color: #fff;
+    background-color: var(--active-cl);
+    border-color: var(--active-cl);
+}
+
+.canvas-control.halt { filter: saturate(0.5); }

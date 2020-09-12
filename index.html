@@ -3,6 +3,7 @@
     <head>
         <script src="./cells.js"></script>
         <meta charset="utf-8" />
+        <link rel="stylesheet" href="./style.css" />
     </head>
     <body>
         <div class="canvas-port">
@@ -11,12 +12,12 @@
                 width="500"
                 height="500">
             </canvas>
+            <button
+                type="button"
+                class="canvas-control">
+                ON/OFF
+            </button>
         </div>
-        <button
-            type="button"
-            class="canvas-control">
-            ON/OFF
-        </button>
     </body>
     <script>
         window.addEventListener('DOMContentLoaded', () => {
@@ -33,15 +34,13 @@
                     '#0ac',
                     '#0b7'])
                 .setBGColor('#000')
-                .seed(0.045)
+                .seed(0.01)
 
             const setupInterval = () => {
-                let graphInterval = setInterval(() => {
+                const graphInterval = setInterval(() => {
                     testCells.step()
                     testCells.visualize()
-                    if(halt) {
-                        clearInterval(graphInterval)
-                    }
+                    halt ? clearInterval(graphInterval) : null
                 }, DELTA)
 
                 return graphInterval
@@ -50,12 +49,9 @@
             setupInterval()
 
             toggle.addEventListener('click', () => {
-                if(!halt) {
-                    halt = true
-                } else {
-                    halt = false
-                    setupInterval()
-                }
+                toggle.classList.toggle('halt')
+                halt = !halt
+                !halt ? setupInterval() :null
             })
         })
     </script>
