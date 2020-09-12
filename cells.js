@@ -138,23 +138,27 @@ class CellField {
         }
     }
     // перевести следующее состояние к настоящему
-    update() {
+    /*update() {
         for(let i = 0; i < this.width; i++) {
             for(let j = 0; j < this.height; j++) {
                 this.cells[i][j] = this.cells[i][j] >> 2
             }
         }
-    }
+    }*/
     // визуализировать
     visualize() {
         this.context.fillStyle = '#000'
         this.context.fillRect(0, 0, this.width, this.height)
+        
         for(let i = 0; i < this.width; i++) {
             for(let j = 0; j < this.height; j++) {
-                const i0 = this.cells[i][j]
-                if(i0) {
-                    this.context.fillStyle = this.palette[i0]
-                    this.context.fillRect(i, j, 1, 1)                    
+                if(this.cells[i][j]) {
+                    this.cells[i][j] >>= 2
+                    const i0 = this.cells[i][j]
+                    if(i0) {
+                        this.context.fillStyle = this.palette[i0]
+                        this.context.fillRect(i, j, 1, 1)      
+                    }
                 }
             }
         }

@@ -8,15 +8,23 @@
         <div class="canvas-port">
             <canvas
                 class="canvas"
-                width="750"
-                height="750">
+                width="500"
+                height="500">
             </canvas>
         </div>
+        <button
+            type="button"
+            class="canvas-control">
+            ON/OFF
+        </button>
     </body>
     <script>
         window.addEventListener('DOMContentLoaded', () => {
-            const testCells = new CellField(1000, 1000)
-            
+            const testCells = new CellField(500, 500)
+            const DELTA = 55
+            const toggle = document.querySelector('.canvas-control')
+            let halt = false
+
             testCells
                 .setContext(document.querySelector('canvas'))
                 .setPalette([
@@ -25,17 +33,30 @@
                     '#0ac',
                     '#0b7'])
                 .setBGColor('#000')
-                .seed(0.45)
-            const t0 = performance.now()
-            for(let i = 0; i < 500; i++) {
-                testCells.step()
-                testCells.update()
+                .seed(0.045)
+
+            const setupInterval = () => {
+                let graphInterval = setInterval(() => {
+                    testCells.step()
+                    testCells.visualize()
+                    if(halt) {
+                        clearInterval(graphInterval)
+                    }
+                }, DELTA)
+
+                return graphInterval
             }
-            console.log((performance.now() - t0)/500)
-            
-            const t1 = performance.now()
-            testCells.visualize()
-            console.log((performance.now() - t1))
+
+            setupInterval()
+
+            toggle.addEventListener('click', () => {
+                if(!halt) {
+                    halt = true
+                } else {
+                    halt = false
+                    setupInterval()
+                }
+            })
         })
     </script>
 </html>
